@@ -4,6 +4,8 @@ import { RequestManager } from 'App/modules/requests/RequestManager'
 import { createEmbed } from 'App/components/embeds'
 import { CommandInteraction, MessageEmbed } from 'discord.js'
 
+const config = require('../../../config.json')
+
 export class ServerData {
   private servers: Array<Server> = []
 
@@ -16,7 +18,7 @@ export class ServerData {
       }
     })
 
-    const informationEmbed: MessageEmbed = createEmbed(`Informations de Rinaorc`, "Informations sur le nombre de connectés de chaques serveurs.", 'Développé par Mathis Audureau')
+    const informationEmbed: MessageEmbed = createEmbed(`Informations des serveurs`, "Informations sur le nombre de connectés de chaques serveurs.")
 
     for (let dataKey in serverData.data["games"]) {
       this.servers.push({
@@ -24,6 +26,7 @@ export class ServerData {
         players: serverData.data["games"][dataKey]["players"]
       })
       informationEmbed.addField(`Serveur ${dataKey}`, `${serverData.data["games"][dataKey]["players"]} joueurs`, true)
+        .setThumbnail(config.embeds.rinaorc)
     }
 
     await interaction.reply({

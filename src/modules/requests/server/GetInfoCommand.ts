@@ -18,7 +18,7 @@ export default class GetInfoCommand extends BaseCommand {
       await new ServerData().registerServer(interaction)
     } catch (error) {
       await interaction.reply({
-        embeds: [createEmbed("Une erreur est survenu.", error.toString(), "Développé par Mathis Audureau")],
+        embeds: [createEmbed("Une erreur est survenu.", error.toString())],
         ephemeral: true
       })
     }

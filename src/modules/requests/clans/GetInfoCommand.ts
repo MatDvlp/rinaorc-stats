@@ -39,22 +39,26 @@ export default class GetInfoCommand extends BaseCommand {
       const description: string = clanData.data['clan']['description']
       const level: string = clanData.data['clan']['level']
       const exp: string = clanData.data['clan']['experience']
+      const expRequired: string = clanData.data['clan']['requiredExperience']
       const player: string = clanData.data['clan']['players'].length
       const playerMax: string = clanData.data['clan']['maxPlayers']
+      const statues: string = clanData.data['clan']['status']
 
-      const informationEmbed: MessageEmbed = createEmbed(`Informations du clan ${name}`, description, 'Développé par Mathis Audureau')
+      const informationEmbed: MessageEmbed = createEmbed(`Informations du clan ${name}`, description)
         .addField('Nom:', String(name + ` ` + `(${id})`), true)
         .addField('Niveau:', String(level), true)
-        .addField('Experience:', String(exp), true)
-        .addField('Joueurs:', String(`${player}/${playerMax}`))
+        .addField('Experience:', String(`${exp}/${expRequired}`), true)
+        .addField('Joueurs:', String(`${player}/${playerMax}`), true)
+        .addField('Statues:', String(statues), true)
 
       await interaction.reply({
         embeds: [informationEmbed],
         ephemeral: true
       })
+      console.log(clanData.data)
     } catch (error) {
       await interaction.reply({
-        embeds: [createEmbed("Une erreur est survenu.", error.toString(), "Développé par Mathis Audureau")],
+        embeds: [createEmbed("Une erreur est survenu.", error.toString())],
         ephemeral: true
       })
     }
