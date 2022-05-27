@@ -1,5 +1,5 @@
 export class RequestManager {
-  private static token: string | number = '652d5556-f4e2-4ce5-8f0f-16504add7a8e';
+  private static token: string | number = '';
 
   public static getToken() {
     return this.token;
